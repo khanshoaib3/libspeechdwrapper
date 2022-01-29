@@ -1,11 +1,14 @@
 package main
 
 import (
+	"C"
+
 	"github.com/ilyapashuk/go-speechd"
 )
 
 var _spd *speechd.SpeechdSession
 
+//export Initialize
 func Initialize() {
 	spd, err := speechd.Open()
 	if err != nil {
@@ -16,6 +19,7 @@ func Initialize() {
 	_spd = spd
 }
 
+//export Speak
 func Speak(text string, interrupt bool) {
 	if interrupt {
 		_spd.Stop()
@@ -24,6 +28,7 @@ func Speak(text string, interrupt bool) {
 	_spd.Speak(text)
 }
 
+//export Close
 func Close() {
 	_spd.Close()
 }
