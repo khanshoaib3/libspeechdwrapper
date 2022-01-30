@@ -1,8 +1,19 @@
+/*
+	Installation:-
+		Copy the libspeechdwrapper.so(in the lib folder) file to /usr/lib like this:-
+			sudo cp ./lib/libspeechdwrapper.so /usr/lib
+
+	Building Shared Library(Optional):-
+		Use the following command to generate the shared library:-
+			go build -buildmode=c-shared -o ./lib/libspeechdwrapper.so .
+
+*/
+
 package main
 
-import (
-	"C"
+import "C"
 
+import (
 	"github.com/ilyapashuk/go-speechd"
 )
 
@@ -36,7 +47,7 @@ func Close() {
 func main() {
 	Initialize()
 
-	Speak("hello", false)
+	Speak("131", false)
 	Speak("shoaib", false)
 
 	Close()

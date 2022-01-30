@@ -7,7 +7,7 @@ import (
 
 func TestNormal(t *testing.T) {
 	Initialize()
-	Speak("Testing", false)
+	Speak("hello", false)
 	Close()
 }
 
