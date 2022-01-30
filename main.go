@@ -36,7 +36,11 @@ func Speak(text string, interrupt bool) {
 		_spd.Stop()
 	}
 
-	_spd.Speak("Saying:" + text)
+	_, err := _spd.Speak("Saying:" + text)
+	if err != nil {
+		print("\nError encountered while speaking with speech dispatcher:\n\t" + err.Error() + "\n")
+		return
+	}
 }
 
 //export Close
