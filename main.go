@@ -23,7 +23,7 @@ var _spd *speechd.SpeechdSession
 func Initialize() {
 	spd, err := speechd.Open()
 	if err != nil {
-		print("Error encountered")
+		print("\nError encountered while initializing speech dispatcher:\n\t" + err.Error() + "\n")
 		return
 	}
 
@@ -36,7 +36,7 @@ func Speak(text string, interrupt bool) {
 		_spd.Stop()
 	}
 
-	_spd.Speak(text)
+	_spd.Speak("Saying:" + text)
 }
 
 //export Close

@@ -17,5 +17,3 @@ msg = GoString(b"I interrupted", 13)
 lib.Speak(msg, True)
 
 lib.Close()
-
-print(lib)
