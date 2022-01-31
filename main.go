@@ -17,21 +17,26 @@ import (
 	"github.com/ilyapashuk/go-speechd"
 )
 
-var _spd *speechd.SpeechdSession
+var _spd *speechd.SpeechdSession = nil
 
 //export Initialize
-func Initialize() {
+func Initialize() int {
 	spd, err := speechd.Open()
 	if err != nil {
 		print("\nError encountered while initializing speech dispatcher:\n\t" + err.Error() + "\n")
-		return
+		return -1
 	}
 
 	_spd = spd
+	return 1
 }
 
 //export Speak
-func Speak(text string, interrupt bool) {
+func Speak(text string, interrupt bool) int {
+	if _spd == nil {
+		return -1
+	}
+
 	if interrupt {
 		_spd.Stop()
 	}
@@ -39,13 +44,20 @@ func Speak(text string, interrupt bool) {
 	_, err := _spd.Speak("Saying:" + text)
 	if err != nil {
 		print("\nError encountered while speaking with speech dispatcher:\n\t" + err.Error() + "\n")
-		return
+		return -1
 	}
+
+	return 1
 }
 
 //export Close
-func Close() {
+func Close() int {
+	if _spd == nil {
+		return -1
+	}
+
 	_spd.Close()
+	return 1
 }
 
 func main() {

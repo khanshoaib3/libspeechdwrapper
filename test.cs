@@ -16,16 +16,25 @@ namespace HelloWorldApplication {
    class HelloWorld {
 
     [DllImport("libspeechdwrapper.so")]
-    private static extern void Initialize();
+    private static extern int Initialize();
 
     [DllImport("libspeechdwrapper.so")]
-    private static extern void Speak(GoString text, bool interrupt);
+    private static extern int Speak(GoString text, bool interrupt);
 
     [DllImport("libspeechdwrapper.so")]
-    private static extern void Close();
-      static void Main(string[] args) {
-        Initialize();
+    private static extern int Close();
 
+    private static bool initialized = false;
+
+    static void Main(string[] args) {
+
+      // To Initialize
+      int res = Initialize();
+      if(res==1)
+        initialized = true;
+
+      // To Speak
+      if(initialized){
         string msg = "Hello from C#!";
         GoString str = new GoString(msg, msg.Length);
         Speak(str, false);
@@ -34,9 +43,13 @@ namespace HelloWorldApplication {
         str.msg = msg;
         str.len = msg.Length;
         Speak(str, true);
-
-        Close();
-
       }
+
+      // To close. IMPORTANT!!
+      if(initialized){
+        Close();
+        initialized = false;
+      }
+    }
    }
 }

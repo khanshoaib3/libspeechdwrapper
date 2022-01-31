@@ -68,9 +68,9 @@ typedef struct { void *data; GoInt len; GoInt cap; } GoSlice;
 extern "C" {
 #endif
 
-extern void Initialize();
-extern void Speak(GoString text, GoUint8 interrupt);
-extern void Close();
+extern GoInt Initialize();
+extern GoInt Speak(GoString text, GoUint8 interrupt);
+extern GoInt Close();
 
 #ifdef __cplusplus
 }
