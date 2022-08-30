@@ -68,8 +68,25 @@ typedef struct { void *data; GoInt len; GoInt cap; } GoSlice;
 extern "C" {
 #endif
 
+
+/**
+* Description: Connects with the speechd socket. If no screen reader is activated, it fails to connect on the first try although if we again try to initialize after 3-4 seconds, it connects successfully.
+* Return:      1 if successful and -1 if unsuccessful.
+*/
 extern GoInt Initialize();
+
+/**
+* Description: Speaks the given text.
+* Parameters:  text = the text to speak. Important!! string variable is accessed in other languages in a special way, refer to https://github.com/vladimirvivien/go-cshared-examples for examples
+*              interrupt = whether to cancel the previous speech or not.
+* Return:      1 if successful and -1 if unsuccessful.
+*/
 extern GoInt Speak(GoString text, GoUint8 interrupt);
+
+/**
+* Description: Disconnects with the speechd socket.
+* Return:      1 if successful and -1 if unsuccessful.
+*/
 extern GoInt Close();
 
 #ifdef __cplusplus

@@ -74,3 +74,11 @@ func Close() int {
 	_spd.Close()
 	return 1
 }
+
+func main() {
+	Initialize()
+
+	Speak("Hello World", true)
+
+	Close()
+}

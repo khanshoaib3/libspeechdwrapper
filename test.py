@@ -4,7 +4,7 @@ import ctypes
 class GoString(ctypes.Structure):
     _fields_ = [("p", ctypes.c_char_p), ("n", ctypes.c_longlong)]
 
-lib = ctypes.CDLL("libspeechdwrapper.so")
+lib = ctypes.CDLL("libspeechdwrapper.so") # Copy file to /usr/lib64 
 
 print("Initializing")
 lib.Initialize()
